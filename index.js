@@ -25,6 +25,7 @@ var iterations = 12000;
  */
 
 exports.length = function(n){
+  if (0 == arguments.length) return len;
   len = n;
 };
 
@@ -36,6 +37,7 @@ exports.length = function(n){
  */
 
 exports.iterations = function(n){
+  if (0 == arguments.length) return iterations;
   iterations = n;
 };
 
