@@ -26,6 +26,12 @@ pass.hash('submitted password', user.salt, function(err, hash){
 })
 ```
 
+Too fast? slow it down:
+
+```js
+pass.iterations(20000);
+```
+
 ## License 
 
 (The MIT License)
