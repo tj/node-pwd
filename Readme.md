@@ -1,7 +1,30 @@
 
-# passhash
+# pwd
 
-  Hash passwords
+  Hash and compare passwords with the crypto's pbkdf2.
+
+# Example
+
+On signup generate a salt / password hash, and save it somewhere:
+
+```js
+var pass = require('pwd');
+pass.hash('my password', function(err, salt, hash){
+  user.salt = salt;
+  user.hash = hash;
+})
+```
+
+To authenticate load and compare:
+
+```js
+var pass = require('pwd');
+pass.hash('submitted password', user.salt, function(err, hash){
+  if (user.hash == hash) {
+    // yay
+  }
+})
+```
 
 ## License 
 
