@@ -49,7 +49,7 @@ exports.iterations = function(n){
  * @api public
  */
 
-exports.hash = function (pwd, salt, fn) {
+exports.hash = function(pwd, salt, fn){
   if (3 == arguments.length) {
     crypto.pbkdf2(pwd, salt, iterations, len, fn);
   } else {
