@@ -10,6 +10,15 @@ describe('.hash(pass, fn)', function(){
       done();
     })
   })
+
+  describe('when pass is missing', function(){
+    it('should pass an error', function(done){
+      pass.hash(null, function(err, salt, hash){
+        err.message.should.include('password missing');
+        done();
+      })
+    })
+  })
 })
 
 describe('.hash(pass, salt, fn)', function(){
@@ -17,6 +26,24 @@ describe('.hash(pass, salt, fn)', function(){
     pass.hash('foobar', function(err, salt, hash){
       pass.hash('foobar', salt, function(err, cpm){
         cpm.should.equal(hash);
+        done();
+      })
+    })
+  })
+
+  describe('when pass is missing', function(){
+    it('should pass an error', function(done){
+      pass.hash(null, 'asdf', function(err, salt, hash){
+        err.message.should.include('password missing');
+        done();
+      })
+    })
+  })
+
+  describe('when salt is missing', function(){
+    it('should pass an error', function(done){
+      pass.hash('asdf', null, function(err, salt, hash){
+        err.message.should.include('salt missing');
         done();
       })
     })

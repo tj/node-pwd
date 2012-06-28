@@ -53,9 +53,12 @@ exports.iterations = function(n){
 
 exports.hash = function(pwd, salt, fn){
   if (3 == arguments.length) {
+    if (!pwd) return fn(new Error('password missing'));
+    if (!salt) return fn(new Error('salt missing'));
     crypto.pbkdf2(pwd, salt, iterations, len, fn);
   } else {
     fn = salt;
+    if (!pwd) return fn(new Error('password missing'));
     crypto.randomBytes(len, function(err, salt){
       if (err) return fn(err);
       salt = salt.toString('base64');
