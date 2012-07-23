@@ -52,8 +52,17 @@ describe('.hash(pass, salt, fn)', function(){
 
 describe('.iterations(n)', function(){
   it('should set iterations', function(){
-    pass.iterations(1000);
-    pass.iterations().should.equal(1000);
+    pass.iterations(10);
+    pass.iterations().should.equal(10);
+  })
+
+  it('should still work', function(done){
+    pass.hash('foobar', function(err, salt, hash){
+      pass.hash('foobar', salt, function(err, cpm){
+        cpm.should.equal(hash);
+        done();
+      })
+    })
   })
 })
 
