@@ -2,6 +2,12 @@
 # pwd
 
   Hash and compare passwords with the crypto's pbkdf2.
+  
+# Installation
+
+```bash
+$ npm install pwd
+```
 
 # Example
 
