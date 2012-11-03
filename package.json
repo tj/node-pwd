@@ -9,5 +9,6 @@
     "mocha": "*",
     "should": "*"
   },
+	"repository": "git://github.com/visionmedia/node-pwd.git",
   "main": "index"
 }
