@@ -55,7 +55,9 @@ exports.hash = function(pwd, salt, fn){
   if (3 == arguments.length) {
     if (!pwd) return fn(new Error('password missing'));
     if (!salt) return fn(new Error('salt missing'));
-    crypto.pbkdf2(pwd, salt, iterations, len, fn);
+    crypto.pbkdf2(pwd, salt, iterations, len, function(err, hash){
+        fn(err, (new Buffer(hash, 'binary')).toString('base64'));
+    });
   } else {
     fn = salt;
     if (!pwd) return fn(new Error('password missing'));
@@ -64,7 +66,7 @@ exports.hash = function(pwd, salt, fn){
       salt = salt.toString('base64');
       crypto.pbkdf2(pwd, salt, iterations, len, function(err, hash){
         if (err) return fn(err);
-        fn(null, salt, hash);
+        fn(null, salt, (new Buffer(hash, 'binary')).toString('base64'));
       });
     });
   }
