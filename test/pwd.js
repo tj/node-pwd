@@ -5,8 +5,8 @@ describe('.hash(pass, fn)', function(){
   it('should generate a salt and hash', function(done){
     pass.hash('foobar', function(err, salt, hash){
       if (err) return done(err);
-      salt.should.be.a('string');
-      hash.should.be.a('string');
+      salt.should.be.a.String;
+      hash.should.be.a.String;
       done();
     })
   })

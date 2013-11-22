@@ -1,8 +1,8 @@
 
-# pwd
+# pwd [![Build Status](https://travis-ci.org/visionmedia/node-pwd.png)](https://travis-ci.org/visionmedia/node-pwd)
 
   Hash and compare passwords with the crypto's pbkdf2.
-  
+
 # Installation
 
 ```bash
@@ -38,7 +38,7 @@ Too fast? slow it down:
 pass.iterations(20000);
 ```
 
-## License 
+## License
 
 (The MIT License)
 

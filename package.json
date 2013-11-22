@@ -1,14 +1,20 @@
 {
   "name": "pwd",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Hash and compare passwords with pbkdf2",
   "keywords": ["pass", "auth", "password", "authentication"],
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "dependencies": {},
   "devDependencies": {
     "mocha": "*",
-    "should": "*"
+    "should": "2"
   },
   "repository": "git://github.com/visionmedia/node-pwd.git",
-  "main": "index"
+  "main": "index",
+  "scripts": {
+    "test": "make test"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  }
 }

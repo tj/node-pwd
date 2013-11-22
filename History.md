@@ -1,5 +1,9 @@
+0.0.3 / 2013-11-21
+==================
 
-0.0.2 / 2012-06-28 
+  * works with node 10+
+
+0.0.2 / 2012-06-28
 ==================
 
   * fix annoying cryptic node errors when nulls are passed
