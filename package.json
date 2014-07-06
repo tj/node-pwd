@@ -13,7 +13,10 @@
     "mocha": "*",
     "should": "2"
   },
-  "repository": "git://github.com/visionmedia/node-pwd.git",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/visionmedia/node-pwd.git"
+  },
   "main": "index",
   "scripts": {
     "test": "make test"
