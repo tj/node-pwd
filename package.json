@@ -1,8 +1,13 @@
 {
   "name": "pwd",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Hash and compare passwords with pbkdf2",
-  "keywords": ["pass", "auth", "password", "authentication"],
+  "keywords": [
+    "pass",
+    "auth",
+    "password",
+    "authentication"
+  ],
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "maintainers": [
     "jonathanong <jonathanrichardong@gmail.com>",
