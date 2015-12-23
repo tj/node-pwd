@@ -75,4 +75,28 @@ exports.hash = function(pwd, salt, fn){
   return function(done){
     fn = done;
   }
+  
+/**
+ * Hashes asynchronously a password with optional `salt`, otherwise
+ * generate a salt for `pass` and invoke `fn(err, salt, hash)`.
+ *
+ * @param {String} password to hash
+ * @param {String} optional salt
+ * @param {Function} callback
+ * @api public
+ */
+exports.hashAsync = function(pwd, salt, fn){
+    var Promise = require('bluebird');
+  	return new Promise(function(resolve, reject){
+  		exports.hash(pwd, salt, function(err, hash)
+  		{
+  			fn(err, hash);
+  			
+  			if(err)
+  				reject();
+  			else
+  				resolve();
+  		});
+  	});
+  };
 };
