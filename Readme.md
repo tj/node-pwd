@@ -1,5 +1,5 @@
 
-# pwd [![Build Status](https://travis-ci.org/visionmedia/node-pwd.png)](https://travis-ci.org/visionmedia/node-pwd)
+# pwd [![Build Status](https://travis-ci.org/tj/node-pwd.png)](https://travis-ci.org/tj/node-pwd)
 
   Hash and compare passwords with the crypto's pbkdf2.
 
