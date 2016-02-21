@@ -1,6 +1,6 @@
 {
   "name": "pwd",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Hash and compare passwords with pbkdf2",
   "keywords": [
     "pass",
