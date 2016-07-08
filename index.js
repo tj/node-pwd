@@ -18,6 +18,11 @@ var len = 128;
 var iterations = 12000;
 
 /**
+ * Digest.
+ */
+var digest = 'sha1';
+
+/**
  * Set length to `n`.
  *
  * @param {Number} n
@@ -42,6 +47,18 @@ exports.iterations = function(n){
 };
 
 /**
+ * Set digest to hash algorithm `hash`.
+ *
+ * @param  {String} hash
+ * @api public
+ */
+exports.digest = function(hash) {
+  if (0 === arguments.length) return digest;
+  if( -1 === crypto.getHashes().indexOf(hash)) throw new Error('invalid hash algorithm');
+  digest = hash;
+};
+
+/**
  * Hashes a password with optional `salt`, otherwise
  * generate a salt for `pass` and invoke `fn(err, salt, hash)`.
  *
@@ -55,7 +72,7 @@ exports.hash = function(pwd, salt, fn){
   if (3 == arguments.length) {
     if (!pwd) return fn(new Error('password missing'));
     if (!salt) return fn(new Error('salt missing'));
-    crypto.pbkdf2(pwd, salt, iterations, len, function(err, hash){
+    crypto.pbkdf2(pwd, salt, iterations, len, digest, function(err, hash){
       if (err) return fn(err);
       fn(null, hash.toString('base64'));
     });
@@ -65,7 +82,7 @@ exports.hash = function(pwd, salt, fn){
     crypto.randomBytes(len, function(err, salt){
       if (err) return fn(err);
       salt = salt.toString('base64');
-      crypto.pbkdf2(pwd, salt, iterations, len, function(err, hash){
+      crypto.pbkdf2(pwd, salt, iterations, len, digest, function(err, hash){
         if (err) return fn(err);
         fn(null, salt, hash.toString('base64'));
       });
