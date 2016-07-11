@@ -66,6 +66,31 @@ describe('.iterations(n)', function(){
   })
 })
 
+describe('.digest(hash)', function(){
+  it('should set hash algorithm', function(){
+    pass.digest('sha256');
+    pass.digest().should.equal('sha256');
+  })
+
+  it('should still work', function(done){
+    pass.hash('foobar', function(err, salt, hash){
+      pass.hash('foobar', salt, function(err, cpm){
+        cpm.should.equal(hash);
+        done();
+      })
+    })
+  })
+  describe('when set invalid hash algorithm', function(){
+    it('should throw an error', function(){
+      try {
+        pass.digest('Donald Trump');
+      } catch(e) {
+        e.message.should.include('invalid hash algorithm');
+      }
+    })
+  })
+})
+
 describe('.length(n)', function(){
   it('should set length', function(){
     pass.length(256);
