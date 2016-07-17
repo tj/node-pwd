@@ -97,3 +97,25 @@ describe('.length(n)', function(){
     pass.length().should.equal(256);
   })
 })
+
+describe('Promise', function() {
+  
+  it('should support promises', function() {
+    pass.hash('foobar').should.be.a.Promise();
+  })
+
+  it('should fulfill promises when hash is successful', function() {
+    return pass.hash('foobar').should.be.fulfilled();
+  })
+
+  it('should reject promises when the hash is not successful', function() {
+    return pass.hash(null, 'asdf').should.be.rejected();
+  })
+
+  it('should return an object with the keys "hash" and "salt" when run as a promise', function() {
+    return pass.hash('foobar').then(function(result) {
+      result.should.have.keys('hash', 'salt')
+    })
+  })
+
+})
