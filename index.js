@@ -59,15 +59,16 @@ exports.digest = function(hash) {
 };
 
 /**
- * Hashes a password with optional `salt`, otherwise
- * generate a salt for `pass` and invoke `fn(err, salt, hash)`.
+ * Hashes a password with optional `salt`, otherwise generate a salt for `pass`
+ * Will invoke `fn(err, salt, hash)` if `fn` is provided,
+ * else will return a Promise resolving to object with signature `{ salt: String, hash: String }`
  *
  * @param {String} password to hash
  * @param {String} optional salt
- * @param {Function} callback
+ * @param {Function} optional callback, if not provided returns a Promise
+ * @returns {Promise|undefined} If no callback provided will return a Promise resolving to signature { salt: String, hash: String }
  * @api public
  */
-
 exports.hash = function(pwd, salt, fn){
   // decide what to do based on argument length
   switch(arguments.length) {
@@ -104,14 +105,21 @@ function isString(s) {
   return typeof s === 'string'
 }
 
-// generate a hash from the given password and salt, returning a promise for its generation.
-// variables 'iterations', 'len', and 'digest' are file scoped.
-// if 'salt' is not passed, it will be automatically generated.
+/**
+ * generate a hash from the given password and salt
+ * if salt is not passed it will be generated
+ *
+ * @param {String} password to hash
+ * @param {String} optional salt
+ * @returns {Promise} Promise resolving to object with signature { salt: String, hash: String }
+ * @api private
+ */
 function generateHash(pwd, salt) {
   return Promise.resolve()
   .then(function() { return salt ? salt : generateSalt() })
   .then(function(salt) {
     return new Promise(function(resolve, reject) {
+      // iterations, len, and digest are file scoped
       crypto.pbkdf2(pwd, salt, iterations, len, digest, function(err, hash){
         if (err) { return reject(err); }
         resolve({ salt, hash: hash.toString('base64') })
@@ -120,10 +128,15 @@ function generateHash(pwd, salt) {
   })
 }
 
-// generate a random salt, returning a promise for its generation.
-// uses the file scoped 'len' variable.
+/**
+ * generate a random salt
+ *
+ * @returns {Promise} Promise resolving to String value. 
+ * @api private
+ */
 function generateSalt() {
   return new Promise(function(resolve, reject) {
+    // len is file scoped
     crypto.randomBytes(len, function(err, salt) {
       if (err) { return reject(err); }
       resolve(salt.toString('base64'))
