@@ -136,4 +136,18 @@ describe('Promise', function() {
     })
   })
 
+  it('should support passing salt', function() {
+    var finished = false;
+    var salt = 'abcd';
+    return pass.hash('foobar', salt)
+    .then(function(result) {
+      result.should.have.keys('hash', 'salt');
+      result.salt.should.equal(salt);
+      finished = true;
+    })
+    .then(function() {
+      finished.should.equal(true);
+    })
+  })
+
 })
