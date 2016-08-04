@@ -38,6 +38,31 @@ Too fast? slow it down:
 pass.iterations(20000);
 ```
 
+# Promises
+
+Functions that take a callback will return a Promise if no callback is provided.
+
+Hashing a password:
+
+```js
+var pass = require('pwd');
+pass.hash('my password').then(function(result) {
+  user.salt = result.salt;
+  user.hash = result.hash;
+});
+```
+
+Authenticating:
+
+```js
+var pass = require('pwd');
+pass.hash('submitted password', user.salt).then(function(result) {
+  if (user.hash === result.hash) {
+    // yay
+  }
+});
+```
+
 ## License
 
 (The MIT License)
