@@ -28,5 +28,11 @@
   },
   "engines": {
     "node": ">= 0.10"
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "node": true
+    }
   }
 }
